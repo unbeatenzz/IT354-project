@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ClassProject.springboot.mapper.CartItemMapper">
+  <resultMap id="BaseResultMap" type="com.ClassProject.springboot.model.CartItem">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cartid" jdbcType="INTEGER" property="cartid" />
+    <result column="productid" jdbcType="INTEGER" property="productid" />
+    <result column="productquantity" jdbcType="INTEGER" property="productquantity" />
+    <result column="val" jdbcType="DOUBLE" property="val" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="itemtitle" jdbcType="VARCHAR" property="itemTitle" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, cartid, productid, productquantity, val, image, itemtitle
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cartitem
+    where cartid = #{cid} and productid = #{pid}
+  </select>
+
+  <select id="getCartItemsByCid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    *
+    from cartitem
+    where cartid = #{cid,jdbcType=INTEGER}
+  </select>
+
+  <select id="getCartItemByCid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    *
+    from cartitem
+    where cartid = #{cid,jdbcType=INTEGER} and productid = #{pid,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cartitem
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.ClassProject.springboot.model.CartItem">
+    insert into cartitem (id, cartid, productid, 
+      productquantity, val,image,itemtitle)
+    values (#{id,jdbcType=INTEGER}, #{cartid,jdbcType=INTEGER}, #{productid,jdbcType=INTEGER}, 
+      #{productquantity,jdbcType=INTEGER}, #{val,jdbcType=DOUBLE},#{image,jdbcType=VARCHAR},#{itemtitle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ClassProject.springboot.model.CartItem">
+    insert into cartitem
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cartid != null">
+        cartid,
+      </if>
+      <if test="productid != null">
+        productid,
+      </if>
+      <if test="productquantity != null">
+        productquantity,
+      </if>
+      <if test="val != null">
+        val,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="itemtitle != null">
+        itemtitle,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cartid != null">
+        #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null">
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="productquantity != null">
+        #{productquantity,jdbcType=INTEGER},
+      </if>
+      <if test="val != null">
+        #{val,jdbcType=DOUBLE},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="itemtitle != null">
+        #{itemtitle,jdbcType=VARCHAR},
+      </if>
+
+      where cartid = #{cid,jdbcType=INTEGER}
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ClassProject.springboot.model.CartItem">
+    update cartitem
+    <set>
+      <if test="cartid != null">
+        cartid = #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="productid != null">
+        productid = #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="productquantity != null">
+        productquantity = #{productquantity,jdbcType=INTEGER},
+      </if>
+      <if test="val != null">
+        val = #{val,jdbcType=DOUBLE},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="itemtitle != null">
+        itemtitle = #{itemtitle,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ClassProject.springboot.model.CartItem">
+    update cartitem
+    set cartid = #{cartid,jdbcType=INTEGER},
+      productid = #{productid,jdbcType=INTEGER},
+      productquantity = #{productquantity,jdbcType=INTEGER},
+      val = #{val,jdbcType=DOUBLE},image = #{image,jdbcType=VARCHAR},itemtitle = #{itemtitle,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <delete id="checkout" parameterType="java.lang.Integer">
+      delete from cartitem where cartid = #{uid,jdbcType=INTEGER}
+  </delete>
+
+</mapper>

@@ -1,0 +1,164 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+  /* Make the image fully responsive */
+          .carousel-inner img {
+              width: 70%;
+              height: 60%;
+          }
+          .loginBtn{
+            color:red;
+            margin-left: 1300px;
+            font-size: 30px;
+          }
+          .welcome{
+            margin-left: 200px;
+          }
+          #searchform{
+            margin-left: 1000px;
+          }
+          .nav-item{
+            margin-left: 50px;
+          }
+          .carousel-inner{
+            margin-left: 300px;
+          }
+        </style>
+</head>
+<body>
+<section id="cover">
+    <div id="cover-caption">
+        <div class="container">
+            <div th:if="${session.username == null}" class="col-sm-12 col-sm-offset-12">
+                <h1 class="welcome">Welcome to IT354 Online store</h1>
+                <span class="loginBtn"><a th:href="@{http://localhost:8010/log}"}>login</a></span>
+            </div>
+            <div th:if="${session.username != null}" class="col-sm-12 col-sm-offset-12">
+                <h1 class="welcome">Welcome to IT354 Online store</h1>
+                <span class="loginBtn"><a th:text="${session.username}" th:href="@{'http://localhost:8010/cartIndex?uid='+${session.uid}}">login</a></span>
+                <span class="loginBtn"><a th:href="@{http://localhost:8010/user/off}"}>logout</a></span>
+            </div>
+        </div>
+    </div>
+</section>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navigation</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">assignments</span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/index}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/product/search?info=sport}">Sports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/product/search?info=food}">food</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/product/search?info=baby}">baby</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/product/search?info=housing}">housing</a>
+                </li>
+            </ul>
+            <form class="d-flex" id="searchform" action="#" th:action="@{/product/search}" method="post">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" th:name="info">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+    <!-- 指示符 -->
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+
+    <!-- 轮播图片 -->
+    <div class="carousel-inner">
+        <div class="carousel-item">
+            <img th:src="@{/dis1.jfif}" height="300px;">
+        </div>
+        <div class="carousel-item active">
+            <img th:src="@{/dis2.png}" height="300px;">
+        </div>
+        <div class="carousel-item">
+            <img th:src="@{/dis3.png}" height="300px;">
+        </div>
+    </div>
+
+    <!-- 左右切换按钮 -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+
+</div>
+
+
+</body>
+<footer class="footer fixed-bottom bg-light text-center text-lg-start ">
+
+    <div class="container p-4">
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Footer Content</h5>
+
+                <p>
+                    IT354 online store will get you anything you need for your home and life!
+                </p>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Class</h5>
+
+                <ul class="list-unstyled mb-0">
+                    <li>
+                        <a href="#!" class="text-dark">IT354</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-0">Author</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!" class="text-dark">Yubai Zhang</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2021 Copyright:
+        <a class="text-dark" href="#">Yubai Zhang @ IT354 Section01</a>
+    </div>
+
+</footer>
+
+</html>

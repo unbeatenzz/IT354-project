@@ -1,0 +1,5 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<a th:href="@{http://localhost:8010/index}"><span th:text="${user != null} ? ${user.username} : 'Error, try again'"></span></a>
+</html>
